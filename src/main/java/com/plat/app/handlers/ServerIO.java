@@ -21,6 +21,15 @@ public class ServerIO {
         return in.readByte();
     }
 
+    public byte readByte() throws IOException {
+        return in.readByte();
+    }
+
+    public byte[] readBytes(byte[] buf) throws IOException {
+        in.readFully(buf);
+        return buf;
+    }
+
     public byte[] readHandshake() throws IOException {
         byte[] buf = new byte[RtmpConstants.HANDSHAKE_PACKET_SIZE];
         in.readFully(buf);

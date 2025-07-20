@@ -1,20 +1,19 @@
 package com.plat.app.chunks;
 
 import com.plat.app.handlers.ServerIO;
-
 import java.io.IOException;
 
-public class BasicHeader {
+public class ChunkHeader {
 
     public int csid;
     public int fmt;
 
-    public BasicHeader(int fmt, int csid,) {
+    public ChunkHeader(int fmt, int csid) {
         this.fmt = fmt;
         this.csid = csid;
     }
 
-    public static BasicHeader read(ServerIO io) throws IOException {
+    public static ChunkHeader read(ServerIO io) throws IOException {
         int b = io.readByte() & 0xFF;
         int fmt = (b >>> 6) & 0x03;
         int csid = b & 0x3F;
@@ -28,6 +27,6 @@ public class BasicHeader {
             int hi = io.readByte() & 0xFF;
             csid =  64 + lo + (hi << 8);
         }
-        return new BasicHeader(fmt, csid);
+        return new ChunkHeader(fmt, csid);
     }
 }
